@@ -71,6 +71,7 @@
 								   th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
 								   th:value="${user!=null?user.username:''}"
 								   id="username" name="username" placeholder="请输入您的账号!" required>
+							<!-- 注册失败时class样式是is-invalid，这里会动态判断，然后显示失败原因，首次注册的话，就不显示 -->
 							<div class="invalid-feedback" th:text="${usernameMsg}">
 								该账号已存在!
 							</div>

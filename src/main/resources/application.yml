@@ -1,5 +1,7 @@
 server:
   port: 8080
+  servlet:
+    context-path: /community
 
 spring:
   thymeleaf:
@@ -16,6 +18,12 @@ spring:
       max-file-size: 1MB
       max-request-size: 5MB
       file-size-threshold: 0MB
+  mail:
+    host: smtp.163.com
+    port: 465
+    username: 15038517453@163.com # 发送方邮箱
+    password: SHJWFCGRCIXVUWEZ  # 邮箱授权码
+    protocol: smtps
 
 
 # MybatisProperties
@@ -26,12 +34,18 @@ mybatis:
     useGeneratedKeys: true
     mapUnderscoreToCamelCase: true
 
-#pagehelper??????
+#pagehelper
 pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+
+community:
+  path:
+    domain: http://localhost:8080
+    upload: D:/XRJ/Java/code/community/src/main/resources/static/userImages
 
 
 

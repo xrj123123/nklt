@@ -22,9 +22,9 @@ public class User {
     private String salt;
     private String email;
     private int type;
-    private int status;
-    private String activationCode;
-    private String headerUrl;
+    private int status; // 拥护是否激活，默认0未激活，拥护注册后，点击邮箱链接激活拥护
+    private String activationCode;  // 激活码
+    private String headerUrl;   // 用户头像
     private Date createTime;
 
 }
