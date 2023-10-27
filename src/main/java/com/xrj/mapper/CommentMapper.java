@@ -18,7 +18,7 @@ import java.util.List;
 public interface CommentMapper {
 
     // 根据实体类类型和id查询对应评论（分页）
-    List<Comment> selectCommentsByEntity(int entityType, int entityId, int offset, int limit);
+    List<Comment> selectCommentsByEntity(int entityType, int entityId);
 
     // 根据实体类类型和id查询评论数目
     int selectCountByEntity(int entityType, int entityId);
@@ -28,5 +28,4 @@ public interface CommentMapper {
 
     // 根据id查询评论
     Comment selectCommentById(int id);
-
 }

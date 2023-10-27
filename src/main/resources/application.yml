@@ -25,6 +25,10 @@ spring:
     password: SHJWFCGRCIXVUWEZ  # 邮箱授权码
     protocol: smtps
 
+  redis:
+    host: 192.168.198.130
+    port: 6379
+    password: 990918
 
 # MybatisProperties
 mybatis:
@@ -46,6 +50,7 @@ community:
   path:
     domain: http://localhost:8080
     upload: D:/XRJ/Java/code/community/src/main/resources/static/userImages
+
 
 
 

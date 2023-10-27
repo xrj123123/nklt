@@ -22,7 +22,6 @@
         and entity_type = #{entityType}
         and entity_id = #{entityId}
         order by create_time asc
-        limit #{offset}, #{limit}
     </select>
 
     <!--int selectCountByEntity(int entityType, int entityId);-->

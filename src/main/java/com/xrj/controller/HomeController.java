@@ -5,13 +5,15 @@ import com.xrj.entity.DiscussPost;
 import com.xrj.entity.Page;
 import com.xrj.entity.User;
 import com.xrj.service.DiscussPostService;
+import com.xrj.service.LikeService;
 import com.xrj.service.UserService;
+import com.xrj.util.CommunityConstant;
+import com.xrj.util.CommunityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -25,12 +27,14 @@ import java.util.*;
  * @Version 1.0
  */
 @Controller
-public class HomeController {
+public class HomeController implements CommunityConstant {
 
     @Autowired
     private DiscussPostService discussPostService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private LikeService likeService;
 
     @GetMapping("/")
     public String root() {
@@ -38,8 +42,7 @@ public class HomeController {
     }
 
     @GetMapping("/index")
-    public String getIndexPage(Model model, @RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum) {
-
+    public String getIndexPage(Model model, @RequestParam(value = "pageNum", defaultValue = "0") Integer pageNum){
         PageInfo<DiscussPost> page = discussPostService.findDiscussPosts(0, pageNum);
         List<DiscussPost> list = page.getList();
 
@@ -50,6 +53,8 @@ public class HomeController {
                 map.put("post", post);
                 User user = userService.findUserById(post.getUserId());
                 map.put("user", user);
+                long likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_POST, post.getId());
+                map.put("likeCount", likeCount);
 
                 discussPosts.add(map);
             }
@@ -72,5 +77,17 @@ public class HomeController {
     @GetMapping("/denied")
     public String getDeniedPage() {
         return "/error/404";
+    }
+
+    // ajax示例
+    @RequestMapping(path = "/ajax", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> testAjax(String name, int age) {
+        System.out.println(name);
+        System.out.println(age);
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", 0);
+        map.put("msg", "操作成功");
+        return map;
     }
 }
